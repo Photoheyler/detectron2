@@ -1,0 +1,23 @@
+
+
+./export_model.py --config-file ../../configs/COCO-InstanceSegmentation/street_mask_rcnn_R_50_FPN_3x.yaml --sample-image resized.jpg --output ./output --export-method tracing --format torchscript MODEL.WEIGHTS ../../../output/model_final.pth MODEL.DEVICE cuda
+
+./export_model.py --config-file ../../configs/COCO-InstanceSegmentation/street_mask_rcnn_R_50_FPN_3x.yaml --sample-image resized.jpg --output ./output --export-method tracing --format onnx MODEL.WEIGHTS ../../../output/model_final.pth MODEL.DEVICE cuda
+
+default export: ./export_model.py --config-file ../../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --sample-image resized.jpg --output ./output --export-method tracing --format onnx MODEL.WEIGHTS ../../../output/model_final.pth MODEL.DEVICE cuda
+
+
+--exported_onnx detectron2/tools/deploy/output/model.onnx --onnx detectron2/tools/deploy/output/converted.onnx --det2_config detectron2/configs/COCO-InstanceSegmentation/street_mask_rcnn_R_50_FPN_3x.yaml --det2_weights output/model_final.pth --sample_image detectron2/tools/deploy/1344x1344.jpg
+
+https://github.com/facebookresearch/detectron2/tree/main/tools/deploy
+
+detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl
+
+python TensorRT/samples/python/detectron2/create_onnx.py \
+    --exported_onnx detectron2/tools/deploy/output/model.onnx \
+    --onnx detectron2/tools/deploy/output/converted.onnx \
+    --det2_config detectron2/configs/COCO-InstanceSegmentation/street_mask_rcnn_R_50_FPN_3x.yaml \
+    --det2_weights output/model_final.pth \
+    --sample_image detectron2/tools/deploy/input_resized.bmp
+
+python TensorRT/samples/python/detectron2/create_onnx.py --exported_onnx detectron2/tools/deploy/output/model.onnx --onnx detectron2/tools/deploy/output/converted.onnx --det2_config detectron2/configs/COCO-InstanceSegmentation/street_mask_rcnn_R_50_FPN_3x.yaml --det2_weights output/model_final.pth --sample_image detectron2/tools/deploy/input_resized.bmp
